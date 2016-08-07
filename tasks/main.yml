@@ -57,7 +57,7 @@
   shell: ./bootstrap.sh -j chdir={{freeswitch_sources_path}}
 
 - name: copy template modules file
-  copy: src={{freeswitch_modules_template}} dest=/usr/src/freeswitch/modules.conf backup=yes
+  template: src={{ freeswitch_modules_template }} dest={{ freeswitch_sources_path }}/modules.conf force=yes
 
 - name: Freeswitch configuration
   shell: ./{{freeswitch_configure_command}} chdir={{freeswitch_sources_path}}
