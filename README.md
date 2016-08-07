@@ -35,6 +35,7 @@ The role variables and default values.
 	freeswitch_group: daemon
 	freeswitch_modules_template: ../templates/modules.conf #modules.conf file used for FreeSwitch compilation
 	freeswitch_init_template: ../templates/freeswitch.init #init script template
+	freeswitch_daemon_args: -nc -nonat
 	freeswitch_configure_command: configure # freeswicth configure command - you can add option
 	freeswitch_log_rotate_script: ../templates/freeswitch_log_rotation # log management script
         freeswitch_log_conf_template: ../template/logfile.conf.xml # freeswitch log configuration file template
