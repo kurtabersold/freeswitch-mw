@@ -15,9 +15,9 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
 DESC="Freeswitch"
 NAME=freeswitch
-DAEMON=/usr/local/freeswitch/bin/$NAME
+DAEMON="{{ freeswitch_path }}/bin/$NAME"
 DAEMON_ARGS="{{ freeswitch_daemon_args }}"
-PIDFILE=/usr/local/freeswitch/run/$NAME.pid
+PIDFILE="{{ freeswitch_path }}/run/$NAME.pid"
 SCRIPTNAME=/etc/init.d/$NAME
 
 FS_USER=freeswitch

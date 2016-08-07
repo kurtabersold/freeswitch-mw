@@ -3,12 +3,12 @@
 # source : http://wiki.fusionpbx.com/index.php?title=RotateFSLogs
 # put in /etc/cron.daily
 # don't forget to make it executable
-# you might consider changing /usr/local/freeswitch/conf/autoload_configs/logfile.conf.xml
+# you might consider changing {{ freeswitch_path }}/conf/autoload_configs/logfile.conf.xml
 #  <param name="rollover" value="0"/>
 
 #number of days of logs to keep
 NUMBERDAYS=30
-FSPATH="/usr/local/freeswitch"
+FSPATH="{{ freeswitch_path }}"
 
 $FSPATH/bin/fs_cli -x "fsctl send_sighup" |grep '+OK' >/tmp/rotateFSlogs
 if [ $? -eq 0 ]; then

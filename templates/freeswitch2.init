@@ -18,7 +18,7 @@
 PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
 DESC=freeswitch
 NAME=freeswitch
-DAEMON=/usr/local/freeswitch/bin/$NAME
+DAEMON="{{ freeswitch_path }}/bin/$NAME"
 USER=freeswitch
 DAEMON_ARGS="-u $USER -ncwait"
 CONFDIR=/etc/$NAME
