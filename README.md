@@ -29,7 +29,7 @@ The role variables and default values.
 ::
 
 	freeswitch_version: v1.4 #FreeSwitch version. Becareful, only tested with 1.4 version for the time being
-	freeswitch_sources_path: /usr/src/freeswitch/ #Path to the FreeSwitch source directory
+	freeswitch_sources_path: /usr/src/freeswitch #Path to the FreeSwitch source directory
 	freeswitch_path: /usr/local/freeswitch/ #Path to the FreeSwith directory
 	freeswitch_owner: freeswitch
 	freeswitch_group: daemon
