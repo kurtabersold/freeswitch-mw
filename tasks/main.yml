@@ -9,44 +9,22 @@
 #- name: Install FreeSwitch server
 #  action: apt name=freeswitch-meta-vanilla update_cache=yes
 
+- name: Add FreeSwitch 1.6 Repo Signing key (Debian)
+  apt_key: url=http://files.freeswitch.org/repo/deb/freeswitch-1.6/freeswitch_archive_g0.pub
+  when: (ansible_distribution == 'Debian')
+
+- name: Add Freeswitch 1.6 apt repository (Debian 8/Jessie)
+  apt_repository: repo='deb http://files.freeswitch.org/repo/deb/freeswitch-1.6/ jessie main'
+  when: (ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie')
+
 # Installation from sources
 - name: Install FreeSwitch dependencies
   apt: name={{ item }} update_cache=yes
   with_items:
-   - autoconf
-   - automake
-   - devscripts
-   - gawk
-   - g++
-   - git-core
-   - libjpeg-dev
-   - libncurses5-dev
-   - libtool
-   - make
-   - python-dev
-   - gawk
-   - pkg-config
-   - libtiff5-dev
-   - libperl-dev
-   - libgdbm-dev
-   - libdb-dev
-   - gettext
-   - libssl-dev
-   - libcurl4-openssl-dev
-   - libpcre3-dev
-   - libspeex-dev
-   - libspeexdsp-dev
-   - libsqlite3-dev
-   - libedit-dev
-   - libldns-dev
-   - libpq-dev
-   
-- name: Specific Debian flavored systems"
-  apt: name={{ item }} update_cache=yes
-  with_items:
-   - libtool-bin
-  when: (ansible_distribution == "Debian" and ansible_distribution_major_version == "7") or
-        (ansible_distribution == "Debian" and ansible_distribution_major_version == "8")
+   - freeswitch-video-deps-most
+   - vim
+   - fail2ban
+  when: (ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie')
 
 - name: Install FreeSwitch source code
   git: repo=https://freeswitch.org/stash/scm/fs/freeswitch.git
@@ -96,9 +74,6 @@
   template: src={{ freeswicth_log_rotate_script }} dest=/etc/cron.daily/freeswitch_log_rotation mode="a+x"
 
 - file: path=/var/log/freeswitch.log owner={{freeswitch_owner}} group={{freeswitch_group}} state=touch
-
-- name: install fail2ban
-  apt: name=fail2ban state=latest
 
 - copy: src={{ fail2ban_local_jail }} dest={{ fail2ban_local_jail_file }}
 - copy: src={{ fail2ban_fs }} dest={{ fail2ban_filter_dir }}/freeswitch.conf
