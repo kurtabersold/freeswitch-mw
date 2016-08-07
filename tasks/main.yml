@@ -83,11 +83,8 @@
 - name: Create /var/lib/freeswitch
   file: path=/var/lib/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="u=rwx,o=" state=directory recurse=yes
 
-- name: copy init script
-  copy: src={{freeswitch_init_template}} dest=/etc/init.d/freeswitch
-
-- name: Change ownership of FreeSwitch init script
-  file: path=/etc/init.d/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="a+x"
+- name: Copy init script template # TODO Systemd
+  template: src={{ freeswitch_init_template }} dest=/etc/init.d/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="a+x"
 
 - name: update init scripts
   shell: update-rc.d freeswitch defaults
