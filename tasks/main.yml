@@ -61,11 +61,11 @@
 - name: Create /var/lib/freeswitch
   file: path=/var/lib/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="u=rwx,o=" state=directory recurse=yes
 
-- name: Copy init script template # TODO Systemd
-  template: src={{ freeswitch_init_template }} dest=/etc/init.d/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="a+x"
-
-- name: update init scripts
-  shell: update-rc.d freeswitch defaults
+- name: systemd service
+  template: src={{ freeswitch_init }} dest=/etc/systemd/system/freeswitch.service force=yes owner=root group=root mode=0644
+  notify:
+    - enable freeswitch
+    - restart freeswitch
 
 - name: cli link
   file: src={{ freeswitch_path }}/bin/fs_cli dest=/bin/fs_cli state=link
