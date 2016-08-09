@@ -62,7 +62,7 @@
   file: path=/var/lib/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="u=rwx,o=" state=directory recurse=yes
 
 - name: systemd service
-  template: src={{ freeswitch_init }} dest=/etc/systemd/system/freeswitch.service force=yes owner=root group=root mode=0644
+  template: src={{ freeswitch_init_template }} dest=/etc/systemd/system/freeswitch.service force=yes owner=root group=root mode=0644
   notify:
     - enable freeswitch
     - restart freeswitch
