@@ -63,6 +63,9 @@
 - name: Create /var/lib/freeswitch
   file: path=/var/lib/freeswitch owner={{freeswitch_owner}} group={{freeswitch_group}} mode="u=rwx,o=" state=directory recurse=yes
 
+- name: Randomize default passwords
+  shell:  /usr/bin/env perl {{ freeswitch_sources_path }}/scripts/perl/randomize-passwords.pl --files={{ freeswitch_path }}/conf/directory/default/1*.xml -D --vmlen=6
+
 - name: systemd service
   template: src={{ freeswitch_init_template }} dest=/etc/systemd/system/freeswitch.service force=yes owner=root group=root mode=0644
   notify:
