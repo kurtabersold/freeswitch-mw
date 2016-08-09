@@ -30,6 +30,8 @@
   git: repo=https://freeswitch.org/stash/scm/fs/freeswitch.git
        dest={{freeswitch_sources_path}}
        version={{freeswitch_version}}
+       update=yes
+       accept_hostkey=yes
 
 - name: bootstrap - take a coffee - it takes time --
   shell: ./bootstrap.sh -j chdir={{freeswitch_sources_path}}
