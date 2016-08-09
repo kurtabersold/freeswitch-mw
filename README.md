@@ -33,7 +33,7 @@ The role variables and default values.
     freeswitch_path: /usr/local/freeswitch #Path to the FreeSwith directory
     freeswitch_owner: freeswitch
     freeswitch_group: daemon
-    freeswitch_modules_template: ../templates/modules.conf #modules.conf file used for FreeSwitch compilation
+    freeswitch_modules_template: ../templates/modules/modules.conf #modules.conf file used for FreeSwitch compilation
     freeswitch_init_template: ../templates/freeswitch-systemd.freeswitch.service # systemd unit file template
     freeswitch_daemon_args: -nonat # -ncwait is set in systemd unit file
     freeswitch_configure_command: configure # freeswicth configure command - you can add option
