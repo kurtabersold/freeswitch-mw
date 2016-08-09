@@ -33,23 +33,23 @@
        update=yes
        accept_hostkey=yes
 
-- name: bootstrap - take a coffee - it takes time --
-  shell: ./bootstrap.sh -j chdir={{freeswitch_sources_path}}
+#- name: bootstrap - take a coffee - it takes time --
+#  shell: ./bootstrap.sh -j chdir={{freeswitch_sources_path}}
 
 - name: copy template modules file
   template: src={{ freeswitch_modules_template }} dest={{ freeswitch_sources_path }}/modules.conf force=yes
 
-- name: Freeswitch configuration
-  shell: ./{{freeswitch_configure_command}} chdir={{freeswitch_sources_path}}
+#- name: Freeswitch configuration
+#  shell: ./{{freeswitch_configure_command}} chdir={{freeswitch_sources_path}}
 
-- name: FreeSwitch make - another coffee ! --
-  shell: make chdir={{freeswitch_sources_path}}
+#- name: FreeSwitch make - another coffee ! --
+#  shell: make chdir={{freeswitch_sources_path}}
 
-- name: FreeSwitch install
-  shell: make install chdir={{freeswitch_sources_path}}
+#- name: FreeSwitch install
+#  shell: make install chdir={{freeswitch_sources_path}}
 
-- name: FreeSwitch install sounds
-  shell: make cd-sounds-install cd-moh-install chdir={{freeswitch_sources_path}}
+#- name: FreeSwitch install sounds
+#  shell: make cd-sounds-install cd-moh-install chdir={{freeswitch_sources_path}}
 
 - name: Add user "freeswitch"
   user: name={{freeswitch_owner}} group={{freeswitch_group}} home={{freeswitch_path}}
@@ -97,10 +97,10 @@
 - name: fail2ban related config templates
   template: src={{item.src}} dest={{item.dest}} force=yes owner={{item.owner}} group={{item.group}} mode={{item.mode}}
   with_items:
-    - { src: '{{ fail2ban_conf }}', dest: '{{ freeswitch_path }}/conf/autoload_configs/fail2ban.conf.xml', owner: '{{ freeswitch_owner }}', group: '{{ freeswitch_group }}', mode: 0660 }
-    - { src: '{{ fail2ban_jail }}', dest: '/etc/fail2ban/jail.d/freeswitch.jail', owner: 'root', group: 'root', mode: 0644 }
-    - { src: '{{ fail2ban_filter_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch.conf', owner: 'root', group: 'root', mode: 0644 }
-    - { src: '{{ fail2ban_filter_dos_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch-dos.conf', owner: 'root', group: 'root', mode: 0644 }
+    - { src: '{{ fail2ban_conf }}', dest: '{{ freeswitch_path }}/conf/autoload_configs/fail2ban.conf.xml', owner: '{{ freeswitch_owner }}', group: '{{ freeswitch_group }}', mode: '0660' }
+    - { src: '{{ fail2ban_jail }}', dest: '/etc/fail2ban/jail.d/freeswitch.jail', owner: 'root', group: 'root', mode: '0644' }
+    - { src: '{{ fail2ban_filter_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch.conf', owner: 'root', group: 'root', mode: '0644' }
+    - { src: '{{ fail2ban_filter_dos_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch-dos.conf', owner: 'root', group: 'root', mode: '0644' }
   notify:
     - restart freeswitch
     - restart fail2ban
