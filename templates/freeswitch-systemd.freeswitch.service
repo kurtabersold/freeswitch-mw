@@ -7,15 +7,15 @@ After=syslog.target network.target local-fs.target
 [Service]
 ; service
 Type=forking
-PIDFile=/run/freeswitch/freeswitch.pid
-Environment="DAEMON_OPTS=-nonat"
+PIDFile={{ freeswitch_path }}/run/freeswitch.pid
+Environment="DAEMON_OPTS={{ freeswitch_daemon_args }}"
 EnvironmentFile=-/etc/default/freeswitch
-ExecStart=/usr/bin/freeswitch -u freeswitch -g freeswitch -ncwait $DAEMON_OPTS
+ExecStart={{ freeswitch_path }}/bin/freeswitch -u {{ freeswitch_owner }} -g {{ freeswitch_group }} -ncwait $DAEMON_OPTS
 TimeoutSec=45s
 Restart=always
 ; exec
-User=root
-Group=daemon
+User={{ freeswitch_owner }}
+Group={{ freeswitch_group }}
 LimitCORE=infinity
 LimitNOFILE=100000
 LimitNPROC=60000
