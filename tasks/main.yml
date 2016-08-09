@@ -77,6 +77,30 @@
 
 - file: path=/var/log/freeswitch.log owner={{freeswitch_owner}} group={{freeswitch_group}} state=touch
 
-- copy: src={{ fail2ban_local_jail }} dest={{ fail2ban_local_jail_file }}
-- copy: src={{ fail2ban_fs }} dest={{ fail2ban_filter_dir }}/freeswitch.conf
-- copy: src={{ fail2ban_dos_fs }} dest={{ fail2ban_filter_dir }}/freeswitch-dos.conf
+# mod_fail2ban
+# https://freeswitch.org/confluence/display/FREESWITCH/Fail2Ban
+# https://freeswitch.org/confluence/display/FREESWITCH/mod_fail2ban
+- name: Fetch fail2ban module source code
+  git: repo=https://github.com/mehulsbhatt/freeswitch-mod_fail2ban.git
+       dest={{freeswitch_sources_path}}/src/mod/applications/mod_fail2ban
+       version=master
+       update=yes
+       accept_hostkey=yes
+
+- name: fail2ban make
+  make: chdir={{freeswitch_sources_path}}/src/mod/applications/mod_fail2ban
+
+- name: fail2ban make install
+  make: chdir={{freeswitch_sources_path}}/src/mod/applications/mod_fail2ban
+        target=install
+
+- name: fail2ban related config templates
+  template: src={{item.src}} dest={{item.dest}} force=yes owner={{item.owner}} group={{item.group}} mode={{item.mode}}
+  with_items:
+    - { src: '{{ fail2ban_conf }}', dest: '{{ freeswitch_path }}/conf/autoload_configs/fail2ban.conf.xml', owner: '{{ freeswitch_owner }}', group: '{{ freeswitch_group }}', mode: '0660' }
+    - { src: '{{ fail2ban_jail }}', dest: '/etc/fail2ban/jail.d/freeswitch.jail', owner: 'root', group: 'root', mode: '0644' }
+    - { src: '{{ fail2ban_filter_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch.conf', owner: 'root', group: 'root', mode: '0644' }
+    - { src: '{{ fail2ban_filter_dos_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch-dos.conf', owner: 'root', group: 'root', mode: '0644' }
+  notify:
+    - restart freeswitch
+    - restart fail2ban

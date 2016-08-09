@@ -3,7 +3,7 @@ enabled  = true
 port     = 5060,5061,5080,5081
 protocol = tcp
 filter   = freeswitch
-logpath  = /var/log/freeswitch.log
+logpath  = {{ freeswitch_path }}/log/fail2ban.log
 maxretry = 10
 action   = iptables-allports[name=freeswitch, protocol=all]
 #           sendmail-whois[name=FreeSwitch, dest=root, sender=chahid.ouarzoun@gmail.com]
@@ -13,7 +13,7 @@ enabled  = true
 port     = 5060,5061,5080,5081
 protocol = udp
 filter   = freeswitch
-logpath  = /var/log/freeswitch.log
+logpath  = {{ freeswitch_path }}/log/fail2ban.log
 maxretry = 10
 action   = iptables-allports[name=freeswitch, protocol=all]
 #           sendmail-whois[name=FreeSwitch, dest=root, sender=chahid.ouarzoun@gmail.com]
@@ -23,7 +23,7 @@ enabled = true
 port = 5060,5061,5080,5081
 protocol = udp
 filter = freeswitch-dos
-logpath = /var/log/freeswitch.log
+logpath = {{ freeswitch_path }}/log/fail2ban.log
 action = iptables-allports[name=freeswitch-dos, protocol=all]
 maxretry = 50
 findtime = 30
