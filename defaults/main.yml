@@ -13,5 +13,4 @@ freeswicth_log_rotate_script: ../templates/freeswitch_log_rotation # log managem
 freeswitch_log_conf_template: ../templates/logfile.conf.xml # freeswitch log configuration file template
 fail2ban_conf: ../templates/fail2ban/fail2ban.conf.xml # Module configuration file
 fail2ban_jail: ../templates/fail2ban/freeswitch.jail # fail2ban template jail for FreeSwitch
-fail2ban_filter_fs: ../templates/fail2ban/freeswitch.filter # Fail2ban filter template for FreeSwitch
-fail2ban_filter_dos_fs: ../templates/fail2ban/freeswitch-dos.filter # Fail2ban filter template for freeswitch dos
+fail2ban_filter: ../templates/fail2ban/freeswitch.filter # Fail2ban filter template for FreeSwitch
