@@ -11,7 +11,9 @@
 #          (?:::f{4,6}:)?(?P<host>[\w\-.^_]+)
 # Values:  TEXT
 #
-failregex = \[WARNING\] sofia_reg.c:\d+ SIP auth challenge \(REGISTER\) on sofia profile \'[^']+\' for \[.*\] from ip <HOST>
+failregex = A registration failed User:\d+ IP:<HOST>
+            A preregistration was atempted User:\d+ IP:<HOST>
+            A registration was atempted User:\d+ IP:<HOST>
 
 # Option:  ignoreregex
 # Notes.:  regex to ignore. If this regex matches, the line is ignored.

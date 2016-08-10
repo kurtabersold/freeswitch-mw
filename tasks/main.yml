@@ -84,7 +84,7 @@
 # https://freeswitch.org/confluence/display/FREESWITCH/Fail2Ban
 # https://freeswitch.org/confluence/display/FREESWITCH/mod_fail2ban
 - name: Fetch fail2ban module source code
-  git: repo=https://github.com/mehulsbhatt/freeswitch-mod_fail2ban.git
+  git: repo=https://github.com/kurtabersold/freeswitch-mod_fail2ban.git
        dest={{freeswitch_sources_path}}/src/mod/applications/mod_fail2ban
        version=master
        update=yes
