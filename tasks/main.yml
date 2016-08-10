@@ -101,9 +101,8 @@
   template: src={{item.src}} dest={{item.dest}} force=yes owner={{item.owner}} group={{item.group}} mode={{item.mode}}
   with_items:
     - { src: '{{ fail2ban_conf }}', dest: '{{ freeswitch_path }}/conf/autoload_configs/fail2ban.conf.xml', owner: '{{ freeswitch_owner }}', group: '{{ freeswitch_group }}', mode: '0660' }
-    - { src: '{{ fail2ban_jail }}', dest: '/etc/fail2ban/jail.d/freeswitch.jail', owner: 'root', group: 'root', mode: '0644' }
-    - { src: '{{ fail2ban_filter_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch.conf', owner: 'root', group: 'root', mode: '0644' }
-    - { src: '{{ fail2ban_filter_dos_fs }}', dest: '/etc/fail2ban/filter.d/freeswitch-dos.conf', owner: 'root', group: 'root', mode: '0644' }
+    - { src: '{{ fail2ban_jail }}', dest: '/etc/fail2ban/jail.d/freeswitch.conf', owner: 'root', group: 'root', mode: '0644' }
+    - { src: '{{ fail2ban_filter }}', dest: '/etc/fail2ban/filter.d/freeswitch.conf', owner: 'root', group: 'root', mode: '0644' }
     - { src: '../templates/modules/modules.conf.xml', dest: '{{ freeswitch_path }}/conf/autoload_configs/modules.conf.xml', owner: '{{ freeswitch_owner }}', group: '{{ freeswitch_group }}', mode: '0660' }
   notify:
     - restart freeswitch
