@@ -9,6 +9,8 @@ dist: trusty
 # Install ansible
 addons:
   apt:
+    sources:
+    - sourceline: 'deb http://archive.ubuntu.com/ubuntu/ trusty main universe'
     packages:
     - python-pip
 
