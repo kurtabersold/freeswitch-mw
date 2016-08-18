@@ -27,8 +27,7 @@ script:
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
 
   # First run
-  - ansible-playbook tests/test.yml -i tests/inventory
-
+  - ansible-playbook tests/test.yml -i tests/inventory -e 'host_key_checking=False'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
