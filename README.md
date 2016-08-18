@@ -1,8 +1,7 @@
-Freeswitch-mw
-=============
+Freeswitch
+==========
 
 [![Build Status](https://travis-ci.org/kurtabersold/freeswitch-mw.svg?branch=master)](https://travis-ci.org/kurtabersold/freeswitch-mw)
-
 
 Ansible role for FreeSwitch
 
@@ -11,21 +10,11 @@ Requirements
 
 - Tested on Ansible 1.8 or higher.
 
-Ansible installation via pip
-----------------------------
-
-::
-
-	sudo apt-get install -y python-pip python-apt python-pycurl libtiff5-dev git
-	sudo pip install ansible
-
-
 Role Variables
 --------------
 
 The role variables and default values.
 
-::
 
     freeswitch_version: v1.6 #FreeSwitch version. Becareful, only tested with 1.6 version for the time being
     freeswitch_sources_path: /usr/src/freeswitch #Path to the FreeSwitch source directory
@@ -46,14 +35,10 @@ The role variables and default values.
 Dependencies
 ------------
 
-No
 
-Usage
------
 
-Add `mwolff44.freeswitch-mw` to your roles ans setup the variables in your playbook file. Example :
-
-::
+Example Playbook
+----------------
 
     - hosts: all
 	  vars_files:
@@ -63,11 +48,8 @@ Add `mwolff44.freeswitch-mw` to your roles ans setup the variables in your playb
 	  handlers:
 	    - include: 'handlers/main.yml'
 
-
-
 License
 -------
-
 
 Licensed under the GPL v3 license. See the LICENSE file for details.
 

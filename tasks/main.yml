@@ -1,21 +1,13 @@
 ---
-# tasks file for freeswitch-mw
-#- name: Add FreeSwitch apt repository (1.4)
-#  apt_repository: repo='deb http://files.freeswitch.org/repo/deb/debian/ wheezy main'
-
-#- name: Add FreeSwitch Repo Signing key
-#  apt_key: url=http://files.freeswitch.org/repo/deb/debian/freeswitch_archive_g0.pub
-
-#- name: Install FreeSwitch server
-#  action: apt name=freeswitch-meta-vanilla update_cache=yes
+# tasks file for freeswitch
 
 - name: Add FreeSwitch 1.6 Repo Signing key (Debian)
   apt_key: url=http://files.freeswitch.org/repo/deb/freeswitch-1.6/freeswitch_archive_g0.pub
-  when: (ansible_distribution == 'Debian')
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Add Freeswitch 1.6 apt repository (Debian 8/Jessie)
   apt_repository: repo='deb http://files.freeswitch.org/repo/deb/freeswitch-1.6/ jessie main'
-  when: (ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie')
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 # Installation from sources
 - name: Install FreeSwitch dependencies
@@ -24,7 +16,7 @@
    - freeswitch-video-deps-most
    - vim
    - fail2ban
-  when: (ansible_distribution == 'Debian' and ansible_distribution_release == 'jessie')
+  when: (ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu')
 
 - name: Install FreeSwitch source code
   git: repo=https://freeswitch.org/stash/scm/fs/freeswitch.git
